@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: buybox
+    schema: raw
+    tables:
+      - name: buybox_raw
+        identifier: BUYBOX_RAW
