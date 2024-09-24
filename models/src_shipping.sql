@@ -16,7 +16,7 @@ flatten_offers AS (
         offer_item.value:"Shipping"::OBJECT:"Amount"::FLOAT AS ShippingAmount,
         offer_item.value:"Shipping"::OBJECT:"CurrencyCode"::STRING AS ShippingCurrencyCode,
         offer_item.value:"ShippingTime"::OBJECT:"AvailabilityType"::STRING AS ShippingAvailabilityType,
-        NULLIF(offer_item.value:"ShippingTime"::OBJECT:"AvailableDate",'')::FLOAT AS ShippingAvailableDate,
+        NULLIF(offer_item.value:"ShippingTime"::OBJECT:"AvailableDate",'')::TIMESTAMP AS ShippingAvailableDate,
         offer_item.value:"ShippingTime"::OBJECT:"MaximumHours"::FLOAT AS ShippingMaximumHours,
         offer_item.value:"ShippingTime"::OBJECT:"MinimumHours"::FLOAT AS ShippingMinimumHours,
         offer_item.value:"ShipsDomestically"::STRING AS ShipsDomestically
