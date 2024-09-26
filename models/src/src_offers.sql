@@ -5,6 +5,7 @@ WITH source_data AS (
 ),
 flatten_payload AS (
     SELECT 
+        raw_data:"EventTime"::TIMESTAMP AS EventTime,
         raw_data:"NotificationMetadata"::OBJECT:"NotificationId"::STRING AS NotificationId,
         offer_item.value:"ASIN"::STRING AS ASIN,
         raw_data:"Payload"::OBJECT:"AnyOfferChangedNotification"::OBJECT:"Offers"::ARRAY AS offers_array
@@ -13,9 +14,10 @@ flatten_payload AS (
 ),
 flatten_offers AS (
     SELECT 
+        EventTime,
         NotificationId,
         ASIN,
-        ROW_NUMBER() OVER(PARTITION BY ASIN ORDER BY NotificationId DESC) AS rn,
+        ROW_NUMBER() OVER(PARTITION BY ASIN ORDER BY NotificationId DESC) AS rn, 
         offer_item.value:"SellerId"::STRING AS SellerId,
         offer_item.value:"IsBuyBoxWinner"::BOOLEAN AS IsBuyBoxWinner,
         offer_item.value:"ListingPrice"::OBJECT:"Amount"::FLOAT AS ListingPriceAmount,
@@ -28,7 +30,9 @@ flatten_offers AS (
 )
 
 SELECT 
+    EventTime,
     rn AS OfferId,
+    ASIN,
     NotificationId,
     SellerId,
     IsBuyBoxWinner,
@@ -39,3 +43,17 @@ SELECT
     Subcondition
 FROM 
     flatten_offers
+GROUP BY 
+    OfferId,
+    ASIN,
+    NotificationId,
+    SellerId,
+    ListingPriceAmount,
+    ListingPriceCurrencyCode,
+    PrimeInformation_IsOfferNationalPrime,
+    PrimeInformation_IsOfferPrime,
+    Subcondition,
+    IsBuyBoxWinner,
+    EventTime
+ORDER BY 
+    OfferId
