@@ -14,7 +14,9 @@ WITH ranked_offers AS (
             PARTITION BY ASIN 
             ORDER BY 
                 IsBuyBoxWinner DESC, 
-                ListingPriceAmount DESC,
+                ListingPriceAmount ASC,
+                PrimeInformation_IsOfferNationalPrime DESC,
+                PrimeInformation_IsOfferPrime DESC,
                 NotificationId DESC    
         ) AS OfferId
     FROM 

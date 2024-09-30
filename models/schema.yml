@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: dim_products
+    description: Cleaned products, which contains every ASIN
+    columns:
+      - name: s_key
+        description: Primary Key for the listing
+        tests:
+          - unique
+          - not_null
+
+      - name: ASIN
+        description: ASIN number for all messages
+        tests:
+          - unique
+          - not_null
+
+      - name: MarketplaceId
+        description: MarketPlace Ids for all products
+        tests:
+          - not_null
+          # - products_marketplaceid_alphanumeric
+
+  - name: fct_ranked
+    description: ranked offers according to buybox winners
+    columns:
+      - name: EventTime
+        description: Time of the event
+        tests:
+          - unique
+          - not_null
+
+                     
+                
+

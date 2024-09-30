@@ -17,7 +17,6 @@ flatten_offers AS (
         EventTime,
         NotificationId,
         ASIN,
-        ROW_NUMBER() OVER(PARTITION BY ASIN ORDER BY NotificationId DESC) AS rn, 
         offer_item.value:"SellerId"::STRING AS SellerId,
         offer_item.value:"IsBuyBoxWinner"::BOOLEAN AS IsBuyBoxWinner,
         offer_item.value:"ListingPrice"::OBJECT:"Amount"::FLOAT AS ListingPriceAmount,
@@ -31,7 +30,6 @@ flatten_offers AS (
 
 SELECT 
     EventTime,
-    rn AS OfferId,
     ASIN,
     NotificationId,
     SellerId,
@@ -44,7 +42,6 @@ SELECT
 FROM 
     flatten_offers
 GROUP BY 
-    OfferId,
     ASIN,
     NotificationId,
     SellerId,
@@ -55,5 +52,3 @@ GROUP BY
     Subcondition,
     IsBuyBoxWinner,
     EventTime
-ORDER BY 
-    OfferId
