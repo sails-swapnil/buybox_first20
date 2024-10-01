@@ -1,0 +1,1 @@
+SELECT *,  CURRENT_TIMESTAMP() AS updated_at FROM {{ref('src_products')}}

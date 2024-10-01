@@ -1,7 +1,6 @@
 version: 2
-
 models:
-  - name: dim_products
+  - name: dim_products_intermediate
     description: Cleaned products, which contains every ASIN
     columns:
       - name: s_key
@@ -21,6 +20,7 @@ models:
         tests:
           - not_null
           # - products_marketplaceid_alphanumeric
+
 
   - name: fct_ranked
     description: ranked offers according to buybox winners
