@@ -6,7 +6,7 @@
         target_schema='DEV',
         unique_key='s_key',
         strategy='check',
-        check_cols='all'
+        check_cols=['s_key', 'MarketplaceId']
     )
 }}
 
