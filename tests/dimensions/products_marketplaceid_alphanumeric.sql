@@ -1,7 +1,7 @@
 WITH invalid_marketplace_ids AS (
     SELECT
         MarketplaceId
-    FROM BUYBOX.RAW.dim_products
+        FROM {{ ref("dim_products") }}
     WHERE MarketplaceId NOT RLIKE '^[a-zA-Z0-9]+$'
 )
 

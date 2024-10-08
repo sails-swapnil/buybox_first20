@@ -1,4 +1,4 @@
-{% snapshot some_snapshots %}
+{% snapshot scd_dim_products %}
 
 {{
     config(

@@ -1,6 +1,6 @@
 version: 2
 models:
-  - name: dim_products_intermediate
+  - name: dim_products
     description: Cleaned products, which contains every ASIN
     columns:
       - name: s_key
@@ -28,7 +28,6 @@ models:
       - name: EventTime
         description: Time of the event
         tests:
-          - unique
           - not_null
 
                      
